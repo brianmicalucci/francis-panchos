@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Francis Panchos – Carritos Gastronómicos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Mountains+of+Christmas:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --naranja:     #f29944;
+      --naranja-claro: #f29944;
+      --crema:       #f6c9aa;
+      --bordo:       #9e1131;
+      --celeste:     #14b2bd;
+      --blanco:      #FFFFFF;
+      --texto:       #1a0a14;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--crema);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─────────────────────────────────── */
+    header {
+      background: var(--naranja);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+
+    header h1 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--blanco);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    header h1 sup {
+      font-size: 0.4em;
+      vertical-align: super;
+      letter-spacing: 0;
+    }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    .hero {
+      background: var(--crema);
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, #fdd9a8 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--bordo);
+      color: var(--blanco);
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(0.75rem, 2vw, 0.9rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 8px 22px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .hero h2 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      color: var(--naranja);
+      line-height: 1;
+      text-shadow: 4px 4px 0 var(--bordo);
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+    }
+
+    .hero-icons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 2.2rem;
+      margin-top: 10px;
+    }
+
+    .hero-icons span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px; height: 54px;
+      background: var(--blanco);
+      border-radius: 50%;
+      border: 3px solid var(--naranja);
+      box-shadow: 3px 3px 0 var(--bordo);
+      transition: transform .2s;
+    }
+
+    .hero-icons span:hover { transform: rotate(-10deg) scale(1.15); }
+
+    /* ─── IMAGEN HERO como fondo ─────────────────── */
+    .hero {
+      position: relative;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 0;
+    }
+
+    .hero-overlay { display: none; }
+
+    .hero > *:not(.hero-bg):not(.hero-overlay) {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── EVENTOS ──────────────────────────────────── */
+    .eventos {
+      background: var(--blanco);
+      padding: 40px 24px;
+    }
+
+    .eventos-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .evento-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 22px 28px;
+      border: 3px solid var(--naranja);
+      border-radius: 16px;
+      font-family: 'Lilita One', cursive;
+      font-size: 1rem;
+      color: var(--naranja);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--blanco);
+      transition: transform .2s, background .2s, color .2s;
+      min-width: 160px;
+    }
+
+    .evento-card:hover {
+      background: var(--naranja);
+      color: var(--blanco);
+      transform: translateY(-4px);
+    }
+
+    .evento-card .icono { font-size: 2.2rem; }
+
+    /* ─── HISTORIA ─────────────────────────────────── */
+    .historia {
+      background: #1a0a14;
+      color: var(--crema);
+      padding: 70px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .historia::before {
+      content: 'FRANCIS';
+      position: absolute;
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(6rem, 20vw, 14rem);
+      color: rgba(255,255,255,0.04);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 10px;
+    }
+
+    .historia h3 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--naranja-claro);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .historia p {
+      max-width: 660px;
+      margin: 0 auto;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      line-height: 1.85;
+      font-weight: 600;
+    }
+
+    .historia p strong { color: var(--naranja-claro); }
+
+    /* Historia fondo */
+    .historia-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+
+    .historia-overlay { display: none; }
+
+    .historia > *:not(.historia-bg):not(.historia-overlay) {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── PLANES ───────────────────────────────────── */
+    .planes {
+      background: var(--crema);
+      padding: 70px 24px;
+      text-align: center;
+    }
+
+    .planes > h3 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--bordo);
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .planes-grid {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .plan-card {
+      background: var(--naranja);
+      color: var(--blanco);
+      border-radius: 22px;
+      padding: 30px 26px 26px;
+      width: 280px;
+      text-align: left;
+      box-shadow: 6px 6px 0 var(--bordo);
+      transition: transform .2s;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .plan-card:hover { transform: translateY(-6px) rotate(-1deg); }
+
+    .plan-card.destacado {
+      background: var(--bordo);
+      box-shadow: 6px 6px 0 #3a0f1a;
+    }
+
+    .plan-card h4 {
+      font-family: 'Lilita One', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    .plan-card .subtitulo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .plan-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .plan-card ul li::before {
+      content: '✓  ';
+      font-weight: 900;
+    }
+
+    .plan-card .precio {
+      font-family: 'Lilita One', cursive;
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+    }
+
+    .plan-card .btn {
+      display: block;
+      text-align: center;
+      background: var(--blanco);
+      color: var(--naranja);
+      font-family: 'Lilita One', cursive;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+
+    .plan-card.destacado .btn { color: var(--bordo); }
+    .plan-card .btn:hover { background: var(--naranja-claro); color: var(--blanco); }
+
+    /* ─── GALERÍA ──────────────────────────────────── */
+    .galeria {
+      background: var(--naranja);
+      padding: 50px 24px;
+    }
+
+    .galeria h3 {
+      font-family: 'Lilita One', cursive;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--blanco);
+      text-align: center;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .galeria-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 4px solid var(--blanco);
+      box-shadow: 4px 4px 0 var(--bordo);
+      transition: transform .2s;
+    }
+
+    .galeria-grid img:hover { transform: scale(1.04) rotate(1deg); }
+
+    /* Placeholder de fotos (se reemplaza con tus imágenes) */
+    .foto-placeholder {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--bordo);
+      border-radius: 14px;
+      border: 4px solid var(--blanco);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lilita One', cursive;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* ─── FOOTER / CONTACTO ────────────────────────── */
+    footer {
+      background: #1a0a14;
+      color: var(--crema);
+      padding: 60px 24px 40px;
+    }
+
+    .footer-titulo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .footer-titulo span {
+      font-family: 'Lilita One', cursive;
+      font-size: 1rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: var(--naranja);
+      color: var(--blanco);
+      padding: 8px 28px;
+      border-radius: 8px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Lilita One', cursive;
+      font-size: 1.1rem;
+      color: var(--naranja-claro);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.7;
+      color: var(--crema);
+      text-decoration: none;
+    }
+
+    .footer-col a:hover { color: var(--naranja-claro); }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.45;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    /* ─── ANIMACIÓN ENTRADA ────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .hero h2, .hero-badge, .plan-card, .evento-card, .historia p {
+      animation: fadeUp .6s ease both;
+    }
+
+    .plan-card:nth-child(2) { animation-delay: .1s; }
+    .plan-card:nth-child(3) { animation-delay: .2s; }
+
+    /* ─── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 600px) {
+      .planes-grid { flex-direction: column; align-items: center; }
+      .plan-card { width: 100%; max-width: 340px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HEADER ══════════════════════════════════════ -->
+  <header>
+    <img src="logo.png" alt="Francis Panchos" style="height:54px; width:auto; display:block;" />
+  </header>
+
+  <!-- ══ HERO ════════════════════════════════════════ -->
+  <section class="hero">
+    <img class="hero-bg" src="hero.jpg" alt="" />
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">Contratá nuestro carrito de</div>
+    <h2>PANCHOS</h2>
+    <div class="hero-icons">
+      <span title="Hot dog">🌭</span>
+      <span title="Fuego">🔥</span>
+      <span title="Fiesta">🎉</span>
+    </div>
+  </section>
+
+  <!-- ══ EVENTOS ══════════════════════════════════════ -->
+  <section class="eventos">
+    <div class="eventos-grid">
+      <div class="evento-card">
+        <span class="icono">🎂</span>
+        Cumpleaños
+      </div>
+      <div class="evento-card">
+        <span class="icono">🎓</span>
+        Egresados
+      </div>
+      <div class="evento-card">
+        <span class="icono">💍</span>
+        Casamientos
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HISTORIA ═════════════════════════════════════ -->
+  <section class="historia">
+    <img class="historia-bg" src="historia.jpg" alt="" />
+    <div class="historia-overlay"></div>
+    <h3>Nuestra reciente historia</h3>
+    <p>
+      Francis nació de algo muy simple: <strong>nuestro amor por los panchos</strong>.
+      Como fanáticos de esta comida tan noble, sentimos que merecía un espacio propio,
+      un lugar donde se la tratara con el respeto, la creatividad y la dedicación que merece.
+      Así fue como decidimos abrir Francis en <strong>San Bernardo</strong>.
+    </p>
+    <br/>
+    <p>
+      Hoy queremos llevar esa experiencia más allá de nuestro local. Por eso creamos
+      nuestro <strong>carro gastronómico</strong>, para acercar el espíritu de Francis
+      a todo tipo de evento. Con nuestros panchos, nuestras salsas y una identidad única,
+      buscamos aportar ese toque especial que transforma cualquier encuentro en un
+      momento inolvidable.
+    </p>
+
+  </section>
+
+  <!-- ══ PLANES ═══════════════════════════════════════ -->
+  <section class="planes">
+    <h3>Elegí tu plan</h3>
+    <div class="planes-grid">
+
+      <div class="plan-card">
+        <h4>Plan Fiesta</h4>
+        <p class="subtitulo">Ideal para casamientos, fiestas de quince, eventos empresariales, grandes celebraciones, entre otros.</p>
+        <ul>
+          <li>Nuestro Carrito</li>
+          <li>Panchero</li>
+          <li>50 panchos</li>
+          <li>Salsas Frías</li>
+          <li>Aderezos</li>
+          <li>Papas pay</li>
+        </ul>
+        <div class="precio">$300.000</div>
+        <a href="https://wa.me/542257663756?text=Hola!%20Quiero%20el%20Plan%20Fiesta%20🌭" class="btn" target="_blank">Lo quiero</a>
+      </div>
+
+      <div class="plan-card destacado">
+        <h4>Plan Francis</h4>
+        <p class="subtitulo">Ideal para casamientos, fiestas de quince, eventos empresariales, grandes celebraciones, entre otros.</p>
+        <ul>
+          <li>Nuestro Carrito</li>
+          <li>Panchero</li>
+          <li>100 panchos</li>
+          <li>Salsas Frías</li>
+          <li>Aderezos</li>
+          <li>Papas pay</li>
+        </ul>
+        <div class="precio">$450.000</div>
+        <a href="https://wa.me/542257663756?text=Hola!%20Quiero%20el%20Plan%20Francis%20🌭" class="btn" target="_blank">Lo quiero</a>
+      </div>
+
+      <div class="plan-card">
+        <h4>Plan Evento</h4>
+        <p class="subtitulo">Ideal para casamientos, fiestas de quince, eventos empresariales, grandes celebraciones, entre otros.</p>
+        <ul>
+          <li>Nuestro Carrito</li>
+          <li>Panchero</li>
+          <li>120 panchos</li>
+          <li>Salsas Frías</li>
+          <li>Aderezos</li>
+          <li>Papas pay</li>
+        </ul>
+        <div class="precio">$480.000</div>
+        <a href="https://wa.me/542257663756?text=Hola!%20Quiero%20el%20Plan%20Evento%20🌭" class="btn" target="_blank">Lo quiero</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ GALERÍA ═══════════════════════════════════════ -->
+  <section class="galeria">
+    <h3>Francis en acción 📸</h3>
+    <div class="galeria-grid">
+      <!--
+        INSTRUCCIÓN: Reemplazá cada src="img/foto1.jpg" con tus propias fotos.
+        Podés agregar o quitar bloques <img> según cuántas fotos tengas.
+      -->
+      <img src="foto1.jpg" alt="Francis foto 1" onerror="this.outerHTML='<div class=\'foto-placeholder\'>Tu foto acá 📷</div>'" />
+      <img src="foto2.jpg" alt="Francis foto 2" onerror="this.outerHTML='<div class=\'foto-placeholder\'>Tu foto acá 📷</div>'" />
+      <img src="foto3.jpg" alt="Francis foto 3" onerror="this.outerHTML='<div class=\'foto-placeholder\'>Tu foto acá 📷</div>'" />
+      <img src="foto4.jpg" alt="Francis foto 4" onerror="this.outerHTML='<div class=\'foto-placeholder\'>Tu foto acá 📷</div>'" />
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-titulo"><span>Contacto</span></div>
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h5>Local</h5>
+        <p>San Bernardo<br/>Calle Sta. María de Oro 45</p>
+        <br/>
+        <p>Abierto<br/>Viernes, Sábados y Domingos<br/>de 12 a 16 y de 19.30 a 23 hs.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Instagram</h5>
+        <a href="https://instagram.com/Francis.Panchos" target="_blank">@Francis.Panchos</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>WhatsApp</h5>
+        <a href="https://wa.me/542257663756" target="_blank">Brian: 2257 663756</a>
+        <br/><br/>
+        <h5>Mail</h5>
+        <a href="mailto:brianmicalucci@gmail.com">brianmicalucci@gmail.com</a>
+      </div>
+
+    </div>
+    <p class="footer-bottom">© 2025 Francis Panchos · San Bernardo, Buenos Aires</p>
+  </footer>
+
+</body>
+</html>
